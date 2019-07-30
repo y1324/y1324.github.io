@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[html-webpack-plugin使用问题]]></title>
+    <url>%2F2019%2F07%2F30%2Fhtml-webpack-plugin%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[html-webpack-plugin使用问题 中文文档：Html-webpack-plugin 安装npm install --save-dev html-webpack-plugin 配置webpack.config.js 1234567891011var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);var path = require(&apos;path&apos;);module.exports = &#123; entry: &apos;index.js&apos;, output: &#123; path: path.resolve(__dirname, &apos;./dist&apos;), filename: &apos;index_bundle.js&apos; &#125;, plugins: [new HtmlWebpackPlugin()]&#125;; 如果使用默认生成的.html文档时，它是没有需要挂载&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;。比如Vue和React需要在.html里写一段需要挂载div，所以需要设置模板。 123456789101112131415var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);var path = require(&apos;path&apos;);module.exports = &#123; entry: &apos;index.js&apos;, output: &#123; path: path.resolve(__dirname, &apos;./dist&apos;), filename: &apos;index_bundle.js&apos; &#125;, plugins: [ new HtmlWebpackPlugin(&#123; template:&quot;public/index.html&quot; &#125;) ]&#125;; 设置好模板后，打包如果出现下面的错误 1234567891011121314ERROR in Template execution failed: ReferenceError: BASE_URL is not definedERROR in ReferenceError: BASE_URL is not defined``` [![gr9CrX.png](https://t1.picb.cc/uploads/2019/07/30/gr9CrX.png)](https://www.picb.cc/image/gr9CrX)就需要配置一个`html-loader`loader，对html文件进行转换。文档处(拉到最下面):[The template option](https://github.com/jantimon/html-webpack-plugin/blob/master/docs/template-option.md)`However this also means that in the following example webpack will use the html loader for your template. This will cause html minification and it will also disable the ejs fallback loader.` { module: { loaders: [ { test: /.html$/, loader: ‘html-loader’ }], }, plugins: [ new HtmlWebpackPlugin({ template: ‘src/index.html’ }) ]}```安装npm install html-loader -D，配置好后，再打包就没问题了。具体是什么原因导致的不清楚，没查出来。望有大佬不吝赐教。]]></content>
+      <categories>
+        <category>webpack</category>
+      </categories>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MockJS笔记]]></title>
+    <url>%2F2019%2F07%2F08%2FMockJS%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[MockJS安装Npm install mockjs —save-dev 2.在src里创建mock文件夹 3.在mock文件夹里创建mock.js 4.在main.js引入mock Require(‘./mock/mock.js’);5.在mock.js开始写配置 以post方式为例： 12345678910111213141516171819202122//引入mockjsconst Mock = require(&quot;mockjs&quot;);// 获取 mock.Random 对象const Random = Mock.Random;//使用mockjs模拟数据Mock.mock(&quot;/api/login&quot;,&apos;post&apos;,(req, res) =&gt; &#123; //当post或get请求到/api/data路由时Mock会拦截请求并返回上面的数据 const login = JSON.parse(req.body); if (login.req === &quot;admin&quot; &amp;&amp; login.res === 123123) &#123; return &#123; state: &quot;ok&quot; &#125;; &#125; else &#123; return &#123; state: &quot;error&quot;, string: &quot;账号或密码错误&quot; &#125;; &#125;&#125;); 12345678910111213//login.vue axios .post(&quot;/api/login&quot;, &#123; req: &quot;admin&quot;, res: 123123 &#125;) .then(res =&gt; &#123; console.log(res); &#125;) .catch(res =&gt; &#123; alert(&quot;wrong&quot;); &#125;); 语法格式：Mock.mock 定义接口里需要有return返回接口结果 Mock.mock(rurl, function(options)) 如果是GET请求，那么要从options.url里面拿，然后自己解析出来； 如果是普通的POST请求，那么要从options.body里面拿，然后自己解析类似a=1&amp;b=2这种格式； 如果参数是JSON格式并且是POST，那么要从options.body里面拿，然后JSON.parse()再获取；]]></content>
+      <categories>
+        <category>mockjs</category>
+      </categories>
+      <tags>
+        <tag>javaScript</tag>
+        <tag>mockjs</tag>
+        <tag>模拟接口</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F07%2F08%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[第一次玩这博客，经理了一下午琢磨，现在已经完成了。只不过需要后续的完善，比如评论、国际化等等。 继续吧！]]></content>
+  </entry>
+</search>
