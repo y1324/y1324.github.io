@@ -102,7 +102,7 @@
 
 
   <meta name="description" content="父组件1234567891011121314151617181920212223242526272829303132&amp;lt;template&amp;gt;  &amp;lt;div class=&quot;parent&quot;&amp;gt;    我是父组件    &amp;lt;!--父组件监听子组件触发的say方法，调用自己的parentSay方法--&amp;gt;    &amp;lt;!--通过:msg将父组件的数据传递给子组件--&amp;gt;">
-<meta name="keywords" content="博客,Finn,笔记,记录,javaScript,JS,HTML,前端,CSS,Hexo,Next">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="父子组件通信：pros、$emit">
 <meta property="og:url" content="https://blog.vygd.top/2019/08/19/父子组件通信：pros、-emit/index.html">
@@ -110,7 +110,7 @@
 <meta property="og:description" content="父组件1234567891011121314151617181920212223242526272829303132&amp;lt;template&amp;gt;  &amp;lt;div class=&quot;parent&quot;&amp;gt;    我是父组件    &amp;lt;!--父组件监听子组件触发的say方法，调用自己的parentSay方法--&amp;gt;    &amp;lt;!--通过:msg将父组件的数据传递给子组件--&amp;gt;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://blog.vygd.top/images/pasted-0.png">
-<meta property="og:updated_time" content="2019-08-19T02:00:29.633Z">
+<meta property="og:updated_time" content="2019-08-19T02:07:35.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="父子组件通信：pros、$emit">
 <meta name="twitter:description" content="父组件1234567891011121314151617181920212223242526272829303132&amp;lt;template&amp;gt;  &amp;lt;div class=&quot;parent&quot;&amp;gt;    我是父组件    &amp;lt;!--父组件监听子组件触发的say方法，调用自己的parentSay方法--&amp;gt;    &amp;lt;!--通过:msg将父组件的数据传递给子组件--&amp;gt;">
@@ -419,7 +419,7 @@
                 
               
 
-              <time title="创建时间：2019-08-19 09:57:37 / 修改时间：10:00:29" itemprop="dateCreated datePublished" datetime="2019-08-19T09:57:37+08:00">2019-08-19</time>
+              <time title="创建时间：2019-08-19 09:57:00 / 修改时间：10:07:35" itemprop="dateCreated datePublished" datetime="2019-08-19T09:57:00+08:00">2019-08-19</time>
             </span>
           
 
@@ -429,6 +429,21 @@
             
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -471,7 +486,7 @@
       
         <h3 id="父组件"><a href="#父组件" class="headerlink" title="父组件"></a>父组件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</span><br><span class="line">    我是父组件</span><br><span class="line">    &lt;!--父组件监听子组件触发的say方法，调用自己的parentSay方法--&gt;</span><br><span class="line">    &lt;!--通过:msg将父组件的数据传递给子组件--&gt;</span><br><span class="line">    &lt;children :msg=<span class="string">"msg"</span> @say=<span class="string">"parentSay"</span>&gt;&lt;/children&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Children <span class="keyword">from</span> <span class="string">'./children.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'hello, children'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  methods: &#123;</span><br><span class="line">      <span class="comment">// 参数就是子组件传递出来的数据</span></span><br><span class="line">      parentSay(msg)&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(msg) <span class="comment">// hello, parent</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 引入子组件</span></span><br><span class="line">  components:&#123;</span><br><span class="line">      children: Children</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="子组件"><a href="#子组件" class="headerlink" title="子组件"></a>子组件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"children"</span> @click=<span class="string">"say"</span>&gt;</span><br><span class="line">      我是子组件</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        父组件对我说：&#123;&#123;msg&#125;&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="regexp">/div&gt;&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">      <span class="comment">//父组件通过props属性传递进来的数据</span></span><br><span class="line">      props: &#123;</span><br><span class="line">          msg: &#123;</span><br><span class="line">              type: <span class="built_in">String</span>,</span><br><span class="line">              <span class="keyword">default</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                  <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      data () &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            childrenSay: <span class="string">'hello, parent'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      methods: &#123;</span><br><span class="line">          <span class="comment">// 子组件通过emit方法触发父组件中定义好的函数，从而将子组件中的数据传递给父组件</span></span><br><span class="line">          say()&#123;</span><br><span class="line">              <span class="keyword">this</span>.$emit(<span class="string">'say'</span> , <span class="keyword">this</span>.childrenSay);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="子组件"><a href="#子组件" class="headerlink" title="子组件"></a>子组件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"children"</span> @click=<span class="string">"say"</span>&gt;</span><br><span class="line">      我是子组件</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        父组件对我说：&#123;&#123;msg&#125;&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">      <span class="comment">//父组件通过props属性传递进来的数据</span></span><br><span class="line">      props: &#123;</span><br><span class="line">          msg: &#123;</span><br><span class="line">              type: <span class="built_in">String</span>,</span><br><span class="line">              <span class="keyword">default</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                  <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      data () &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            childrenSay: <span class="string">'hello, parent'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      methods: &#123;</span><br><span class="line">          <span class="comment">// 子组件通过emit方法触发父组件中定义好的函数，从而将子组件中的数据传递给父组件</span></span><br><span class="line">          say()&#123;</span><br><span class="line">              <span class="keyword">this</span>.$emit(<span class="string">'say'</span> , <span class="keyword">this</span>.childrenSay);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p>vue父子通信.png<br><img src="/images/pasted-0.png" alt="upload successful"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>vue的父子组件间通信可以总结成一句话：父组件通过 prop 给子组件下发数据，子组件通过$emit触发事件给父组件发送消息，即 prop 向下传递，事件向上传递。</p>
@@ -496,6 +511,15 @@
     
 
     <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
       
 
       
@@ -604,7 +628,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -629,7 +657,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
